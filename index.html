@@ -56,7 +56,7 @@
     .overlay-enter-btn:hover { background: var(--gold); color: var(--deep); }
 
     /* ── MUSIC BUTTON ── */
-    #music-btn { position: fixed; bottom: 28px; right: 28px; z-index: 999; background: var(--rose); color: var(--gold-light); border: 1px solid var(--gold); border-radius: 50px; padding: 10px 20px; font-family: var(--font-body); font-size: 0.72rem; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(58,46,42,0.25); }
+    #music-btn { position: fixed; bottom: 28px; right: 28px; z-index: 999; background: var(--deep); color: var(--gold-light); border: 1px solid var(--gold); border-radius: 50px; padding: 10px 20px; font-family: var(--font-body); font-size: 0.72rem; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(58,46,42,0.25); }
     #music-btn:hover { background: var(--rose); border-color: var(--rose); color: #fff; }
     #music-btn .note { font-size: 1rem; }
 
@@ -170,7 +170,7 @@
     #rsvp .section-label::after { display: none; }
     .rsvp-title { font-family: var(--font-display); font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 300; font-style: italic; color: var(--deep); margin-bottom: 12px; }
     .rsvp-sub { font-family: var(--font-body); font-size: 0.8rem; font-weight: 300; color: var(--muted); letter-spacing: 0.05em; margin-bottom: 40px; }
-    .btn-open-rsvp { display: inline-block; padding: 18px 56px; background: var(--blue); color: var(--gold-light); border: 1px solid var(--deep); font-family: var(--font-body); font-size: 0.7rem; font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: all 0.35s ease; }
+    .btn-open-rsvp { display: inline-block; padding: 18px 56px; background: var(--deep); color: var(--gold-light); border: 1px solid var(--deep); font-family: var(--font-body); font-size: 0.7rem; font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: all 0.35s ease; }
     .btn-open-rsvp:hover { background: var(--rose); border-color: var(--rose); color: #fff; }
 
     /* ── MODAL ── */
@@ -435,6 +435,86 @@
   </div>
 </div>
 
+<!-- ══════════════ LOCATION MAP ══════════════ -->
+<section id="location" style="max-width:100%; padding: 70px 24px; background: var(--cream); text-align:center;">
+  <div style="max-width:760px; margin:0 auto;" class="reveal">
+    <p class="section-label" style="justify-content:center;">cum ajungeți la noi</p>
+    <h2 style="font-family:var(--font-display); font-size:clamp(2rem,6vw,3.2rem); font-weight:300; font-style:italic; color:var(--deep); margin-bottom:8px;">Locația evenimentului</h2>
+    <p style="font-family:var(--font-body); font-size:0.8rem; font-weight:300; color:var(--muted); margin-bottom:32px; letter-spacing:0.05em;">Shaker Events &nbsp;·&nbsp; Budeasa Mare, Argeș</p>
+  </div>
+</section>
+
+<!-- Full-width map -->
+<div id="map-wrapper" style="width:100%; height:420px; position:relative; overflow:hidden;">
+  <!--
+    ✏️ HOW TO INSERT YOUR GOOGLE MAPS LINK:
+    1. Go to maps.google.com and search for your venue
+    2. Click "Share" → "Embed a map" → Copy the iframe src URL
+    3. Replace YOUR_GOOGLE_MAPS_EMBED_URL below with that URL
+    Example src: "https://www.google.com/maps/embed?pb=!1m18!..."
+  -->
+  <iframe
+    id="map-iframe"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2813.9914586247633!2d24.82176207606151!3d44.922790469399615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b2b992e8a797c9%3A0x553762ef658f9914!2sShaker!5e1!3m2!1sro!2sro!4v1773171738671!5m2!1sro!2sro"
+    width="100%"
+    height="420"
+    style="border:0; display:block;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+
+  <!-- Shown only if src is not yet set -->
+  <div id="map-placeholder" style="
+    position:absolute; inset:0;
+    background: var(--warm-white);
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    gap:14px;
+    border-top: 1px solid var(--blush);
+    border-bottom: 1px solid var(--blush);
+  ">
+    <span style="font-size:2.5rem;">📍</span>
+    <p style="font-family:var(--font-display); font-size:1.3rem; font-style:italic; color:var(--deep);">Shaker Events, Budeasa Mare</p>
+    <p style="font-family:var(--font-body); font-size:0.75rem; font-weight:300; color:var(--muted); max-width:360px; line-height:1.6;">
+      Inserați link-ul Google Maps în cod pentru a afișa harta interactivă.<br/>
+      <em>Căutați locația → Share → Embed a map → copiați URL-ul.</em>
+    </p>
+  </div>
+</div>
+
+<!-- Directions button -->
+<div style="background:var(--warm-white); border-top:1px solid var(--blush); border-bottom:1px solid var(--blush); padding:20px 24px; text-align:center;">
+  <!--
+    ✏️ Replace YOUR_GOOGLE_MAPS_DIRECTIONS_URL with a link like:
+    https://maps.google.com/?q=Shaker+Events+Budeasa+Mare
+    or copy the share link directly from Google Maps
+  -->
+  <a
+    id="directions-btn"
+    href="https://www.google.com/maps/dir//Shaker,+DJ703K+242+Bis,+Budeasa+Mare/@44.9227905,24.8217621,646m/data=!3m1!1e3!4m17!1m7!3m6!1s0x40b2b992e8a797c9:0x553762ef658f9914!2sShaker!8m2!3d44.9227867!4d24.824337!16s%2Fg%2F1hc0zkd79!4m8!1m0!1m5!1m1!1s0x40b2b992e8a797c9:0x553762ef658f9914!2m2!1d24.8244977!2d44.9228837!3e2?entry=ttu&g_ep=EgoyMDI2MDMwOS4wIKXMDSoASAFQAw%3D%3D"
+    target="_blank"
+    style="
+      display:inline-block;
+      padding:14px 44px;
+      background:var(--deep);
+      color:var(--gold-light);
+      border:1px solid var(--deep);
+      font-family:var(--font-body);
+      font-size:0.7rem;
+      font-weight:300;
+      letter-spacing:0.3em;
+      text-transform:uppercase;
+      text-decoration:none;
+      transition:all 0.35s ease;
+    "
+    onmouseover="this.style.background='var(--rose)';this.style.borderColor='var(--rose)';this.style.color='#fff'"
+    onmouseout="this.style.background='var(--deep)';this.style.borderColor='var(--deep)';this.style.color='var(--gold-light)'"
+  >
+    🗺 Deschide în Google Maps
+  </a>
+</div>
+
 <!-- ══════════════ FOOTER ══════════════ -->
 <footer>
   <span>Cosmina &amp; Liviu &nbsp;·&nbsp; 26 iunie 2026</span>
@@ -563,6 +643,13 @@
       btn.disabled = false;
       btn.textContent = 'Trimite răspunsul!';
     });
+  }
+
+  // ── Hide map placeholder when real URL is set ──
+  const mapIframe = document.getElementById('map-iframe');
+  const mapPlaceholder = document.getElementById('map-placeholder');
+  if (mapIframe && mapIframe.src && !mapIframe.src.includes('YOUR_GOOGLE_MAPS_EMBED_URL')) {
+    mapPlaceholder.style.display = 'none';
   }
 
   const observer = new IntersectionObserver((entries) => {
